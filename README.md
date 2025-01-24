@@ -1,1 +1,1 @@
-# MERN-Notes-App
+# MERN-Product-App
