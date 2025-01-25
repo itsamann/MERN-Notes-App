@@ -8,7 +8,7 @@
     "start": "node server/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Aman Sharma",
   "type": "module",
   "license": "ISC",
   "description": "",
