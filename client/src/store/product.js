@@ -38,4 +38,24 @@ export const useProductStore = create((set) => ({
     }));
     return { success: true, message: data.message };
   },
+  updateProduct: async (productId, updatedProduct) => {
+    const response = await fetch(`/api/products/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedProduct),
+    });
+    const data = await response.json();
+    if (!data.success) {
+      return { success: false, message: data.message };
+    }
+
+    set((state) => ({
+      products: state.products.map((product) =>
+        product._id === productId ? data.data : product
+      ),
+    }));
+    return { success: true, message: data.message };
+  },
 }));
