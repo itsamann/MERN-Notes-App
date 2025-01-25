@@ -18,4 +18,24 @@ export const useProductStore = create((set) => ({
     set((state) => ({ products: [...state.products, data] }));
     return { success: true, message: "Product created successfully." };
   },
+
+  fetchProducts: async () => {
+    const response = await fetch("/api/products");
+    const data = await response.json();
+    set({ products: data.data });
+  },
+  deleteProduct: async (productId) => {
+    const response = await fetch(`/api/products/${productId}`, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    if (!data.success) {
+      return { success: false, message: data.message };
+    }
+
+    set((state) => ({
+      products: state.products.filter((product) => product._id !== productId),
+    }));
+    return { success: true, message: data.message };
+  },
 }));
